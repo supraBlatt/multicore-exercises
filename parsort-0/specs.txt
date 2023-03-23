@@ -1,0 +1,43 @@
+- graded based on correctness and not performance
+-- also on seeing i made an effort.
+-- exploit parallelism 
+
+= arguments: 
+parsort [num of processors] [input file]
+
+= input file 
+sequence of 64-bit unsigned integers 
+delimited by newline 
+guaranteed each int is unique
+
+= program flow 
+1. open and read file 
+2. sort the integer sequence. T microseconds 
+3. write "[sorting alg] [T]" to stdout 
+4. write the sorted sequence to stdout 
+
+! dont include IO time in printed time 
+
+= tips 
+- given sorted.txt to compare sorted sequence against
+- print time in microsecnds
+- server has GCC 7.5.0 so c11. use -O3 flag (?) 
+
+= parallelism framework. 
+openMP https://computing.llnl.gov/tutorials/openMP/
+- for openMP add -fopenmp to compilation command line 
+
+CilkPlus fork/join framework (is on the server). 
+- /specific/disk1/home/mad/gcc-cilk/bin/g++ prog.cpp -fcilkplus -lcilkrts 
+- example for Cilk programs /specific/disk1/home/mad/cilkutil/examples
+
+run on a 'clean environment' 
+
+= submit 
+zip with source code and 'build' script. 
+unpacking zip and then running build should build 'parsort' 
+
+- for java, build should compile the program and parsort is 
+  a script that sets up the env variables for the JVM and 
+	then runs the program 
+
