@@ -3,6 +3,7 @@
 #include <vector>
 #include <omp.h>
 #include <algorithm>
+#include <chrono>
 
 std::vector<std::uint64_t> load_file_contents (const std::string& path) { 
 
@@ -25,10 +26,8 @@ std::vector<std::uint64_t> load_file_contents (const std::string& path) {
 }
 
 void parallel_mergesort(std::vector<std::uint64_t>& vec, int left, int right) {
-	if (right <= left) { 
-    return; 
-  }
-
+  // serial sections
+	if (right <= left) { return; }
   auto middle = (right + left)/2;
 
   // make two tasks, one for each half
@@ -36,12 +35,13 @@ void parallel_mergesort(std::vector<std::uint64_t>& vec, int left, int right) {
   parallel_mergesort(vec, left, middle);
   #pragma omp task
   parallel_mergesort(vec, middle+1, right);
+
   // sync the tasks
   #pragma omp taskwait
 
   // merge the two sorted halves
   auto begin = vec.begin();
-  std::inplace_merge(begin + left, begin + middle + 1, begin + right + 1); // still using as a crutch
+  std::inplace_merge(begin + left, begin + middle + 1, begin + right + 1); 
 }
 
 void parallel_sort(std::vector<uint64_t>& vec, int num_threads) {
@@ -56,11 +56,13 @@ void parallel_sort(std::vector<uint64_t>& vec, int num_threads) {
 
 int main() {
   auto numbers = load_file_contents("test-files/input.txt");  
-  std::cout << numbers.size();
 
-  // sort the numbers
-  // sort 
-
-  // print timed results
+  auto start_time = std::chrono::high_resolution_clock::now();
+  parallel_sort(numbers, 2);
+  auto end_time = std::chrono::high_resolution_clock::now();
+  auto duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+    
+  std::cout << "Merge Sort " << duration_us.count() << std::endl;
+  for (auto e: numbers) { std::cout << e << " "; }
   return 0;
 }
