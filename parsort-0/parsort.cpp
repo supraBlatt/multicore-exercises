@@ -28,7 +28,7 @@ std::vector<std::uint64_t> load_file_contents (const std::string& path) {
 
 void mergesort(std::vector<std::uint64_t>& vec, int left, int right) {
   // serial sections
-	if (right <= left) { return; }
+  if (right <= left) { return; }
   auto middle = (right + left)/2;
 
   mergesort(vec, left, middle);
@@ -41,7 +41,7 @@ void mergesort(std::vector<std::uint64_t>& vec, int left, int right) {
 
 void parallel_mergesort(std::vector<std::uint64_t>& vec, int left, int right) {
   // serial sections
-	if ((right - left) <= THRESHOLD) { mergesort(vec, left, right); return; }
+  if ((right - left) <= THRESHOLD) { mergesort(vec, left, right); return; }
   auto middle = (right + left)/2;
 
   // make two tasks, one for each half
