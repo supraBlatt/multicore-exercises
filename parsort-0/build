@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # compile with O3 optimization and C++11
-g++ -std=c++11 -O3 -fopenmp main.cpp -o parsort
+g++ -std=c++11 -O3 -fopenmp parsort.cpp -o parsort
