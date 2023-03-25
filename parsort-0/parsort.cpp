@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
   auto duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
 
   // print [sort name] [time] \n [sorted array]
-  std::cout << "Merge Sort " << duration_us.count() << std::endl;
-  //for (auto e: numbers) { std::cout << e << " "; }
+  std::cout << "MergeSort: " << duration_us.count() << std::endl;
+  for (auto e: numbers) { std::cout << e << " "; }
   return 0;
 }
