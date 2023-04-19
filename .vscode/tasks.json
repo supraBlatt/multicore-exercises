@@ -3,7 +3,7 @@
     {
       "type": "cppbuild",
       "label": "C/C++: g++.exe build active file",
-      "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+      "command": "g++",
       "args": [
         "-fdiagnostics-color=always",
         "-g",
@@ -12,7 +12,7 @@
         "-Weffc++",
         "-Wextra",
         "-Wsign-conversion",
-        "-std=c++11",
+        // "-std=c++11",
         "${file}",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
