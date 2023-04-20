@@ -1,5 +1,9 @@
 In this assignment we will try to make a *speculative execution attack* that abuses some weird processor optimization, paired with some virtual memory shenanigans.
 
+------
+
+## Background
+
 ### Store/load forwarding
 When you'd like to load something from some address A, the processor would check the ROB for a recent store to this address. If there is one, it would forward the data that was about to be stored into whatever is asking for the load.  
 
@@ -34,7 +38,7 @@ Then, if the speculation was 'wrong', as in, the virtual address for the load ge
 I'm not sure how the roll-backs squash and re-execute things and what gets re-executed, but Biggus seems to think that the load gets executed again and that causes the time penalty. 
 
 ----------
-
+## Assignment 
 > This kind of speculation can be exploited in a same-thread attack, for example in the context of JavaScript or a similar VM. Suppose the VM writes to address A, which is secret and cannot be accessed by untrusted code. But if the untrusted code has a load to address B that 4K aliases with A, it will get the contents of the store through speculative forwarding  and can hopefully leak it through a cache side-channel before being squashed
 
 We seem to want to try and abuse this squashing and this weird 'easy access to addresses' using 4k alignment. If the victim were to write something into an address, and we would load into an address that is 4K aligned with it, hopefully we could get the processor to speculate, if Biggus's assumption was right.
@@ -51,8 +55,8 @@ store(A)
 	leak(B)
 // 
 ```
-
-### Tips
+--------
+## Tips
 
 > Read and understand spectre.c to see how to flush cache lines and leak bytes over a cache side-channel. You can then modify the file to implement Herbert’s attack.  
 
