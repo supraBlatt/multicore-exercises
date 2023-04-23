@@ -5,17 +5,18 @@
       "label": "C/C++: g++.exe build active file",
       "command": "g++",
       "args": [
-        "-fdiagnostics-color=always",
-        "-g",
-        "-pedantic-errors",
-        "-Wall",
-        "-Weffc++",
-        "-Wextra",
-        "-Wsign-conversion",
+        // "-fdiagnostics-color=always",
+        // "-g",
+        // "-pedantic-errors",
+        // "-Wall",
+        // "-Weffc++",
+        // "-Wextra",
+        // "-Wsign-conversion",
         // "-std=c++11",
         "${file}",
         "-o",
-        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+        "${fileDirname}\\${fileBasenameNoExtension}"
+        // "${fileDirname}\\${fileBasenameNoExtension}.exe"
       ],
       "options": {
         "cwd": "${fileDirname}"
